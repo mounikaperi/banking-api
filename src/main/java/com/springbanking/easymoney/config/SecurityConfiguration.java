@@ -34,7 +34,7 @@ public class SecurityConfiguration {
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
 
-//        Approach 1- Where we ue withDefaultPasswordEncoder() method while creating the user details- deprecated
+        // Approach 1- Where we ue withDefaultPasswordEncoder() method while creating the user details- deprecated
         UserDetails admin = User.withDefaultPasswordEncoder().username("admin").password("admin").authorities("admin").build();
         UserDetails user = User.withDefaultPasswordEncoder().username("user").password("user").authorities("read").build();
         return new InMemoryUserDetailsManager(admin, user);
