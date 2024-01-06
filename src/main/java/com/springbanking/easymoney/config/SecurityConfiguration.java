@@ -7,10 +7,14 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class SecurityConfiguration {
@@ -26,14 +30,15 @@ public class SecurityConfiguration {
         return http.build();
     }
 
+    /**
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
-        /**
-        Approach 1- Where we ue withDefaultPasswordEncoder() method while creating the user details- deprecated
+
+//        Approach 1- Where we ue withDefaultPasswordEncoder() method while creating the user details- deprecated
         UserDetails admin = User.withDefaultPasswordEncoder().username("admin").password("admin").authorities("admin").build();
         UserDetails user = User.withDefaultPasswordEncoder().username("user").password("user").authorities("read").build();
         return new InMemoryUserDetailsManager(admin, user);
-         */
+
 
         // Approach-2: Using NoOpPasswordEncoder - simplest password encoder- not for production
         InMemoryUserDetailsManager inMemoryUserDetailsManager = new InMemoryUserDetailsManager();
@@ -43,8 +48,11 @@ public class SecurityConfiguration {
         inMemoryUserDetailsManager.createUser(user1);
         return inMemoryUserDetailsManager;
     }
-
-    // Only applicable for Approach2
+    */
+    @Bean
+    public UserDetailsService userDetailsService(DataSource dataSource) {
+        return new JdbcUserDetailsManager(dataSource);
+    }
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
