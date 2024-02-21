@@ -29,6 +29,7 @@ public class CardsServiceImplementation implements ICardsService {
         cardsRepository.save(createNewCard(mobileNumber));
     }
 
+
     private Cards createNewCard(String mobileNumber) {
         Cards newCard = new Cards();
         newCard.setMobileNumber(mobileNumber);
@@ -41,9 +42,9 @@ public class CardsServiceImplementation implements ICardsService {
         return newCard;
     }
 
-    public CardsDTO fetchCard(String mobileNumber) {
+    public CardsDTO fetchCardDetails(String mobileNumber) {
         Cards cards = cardsRepository.findByMobileNumber(mobileNumber).orElseThrow(
-                () -> new ResourceNotFoundException("Card", "mobileNumber", mobileNumber);
+                () -> new ResourceNotFoundException("Card", "mobileNumber", mobileNumber)
         );
         return CardsMapper.mapToCardsDTO(cards, new CardsDTO());
     }
