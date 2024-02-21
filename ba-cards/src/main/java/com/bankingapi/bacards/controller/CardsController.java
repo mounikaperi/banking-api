@@ -52,5 +52,21 @@ public class CardsController {
         return ResponseEntity.status(HttpStatus.OK).body(cardsDTO);
     }
 
+    @Operation(summary = "Update Card Details REST API", description = "REST API to update card details based on a card number")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "HTTP Status OK"),
+            @ApiResponse(responseCode = "417", description = "Expectation Failed"),
+            @ApiResponse(responseCode = "500", description = "HTTp Status Internal Server Error",
+                content = @Content(schema = @Schema(implementation = ErrorResponseDTO.class)))
+    })
+    @PutMapping("/update")
+    public ResponseEntity<ResponseDTO> updateCardDetails(@Valid @RequestBody CardsDTO cardsDTO) {
+        boolean isUpdated = iCardsService.updateCard(cardsDTO);
+        if (isUpdated) {
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseDTO(CardsConstants.STATUS_200, CardsConstants.MESSAGE_200));
+        }
+        return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseDTO(CardsConstants.STATUS_417, CardsConstants.MESSAGE_417_UPDATE));
+    }
+
     
 }
