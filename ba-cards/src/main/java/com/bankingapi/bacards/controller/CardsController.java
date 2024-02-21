@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -68,5 +69,19 @@ public class CardsController {
         return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseDTO(CardsConstants.STATUS_417, CardsConstants.MESSAGE_417_UPDATE));
     }
 
-    
+    @Operation(summary = "Delete Card Details REST API", description = "REST API to delete card details based on mobile number")
+    @ApiResponses({
+       @ApiResponse(responseCode = "200", description = "HTTP Status OK"),
+       @ApiResponse(responseCode = "417", description = "Expectation Failed"),
+       @ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error",
+            content = @Content(schema = @Schema(implementation = ErrorResponseDTO.class)))
+    })
+    @DeleteMapping("/delete")
+    public ResponseEntity<ResponseDTO> deleteCardDetails(@RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile Number must be 10 digits") String mobileNumber) {
+        boolean isDeleted = iCardsService.deleteCard(mobileNumber);
+        if (isDeleted) {
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseDTO(CardsConstants.STATUS_200, CardsConstants.MESSAGE_200));
+        }
+        return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseDTO(CardsConstants.STATUS_417, CardsConstants.MESSAGE_417_DELETE));
+    }
 }
