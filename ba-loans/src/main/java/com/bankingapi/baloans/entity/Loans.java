@@ -22,6 +22,8 @@ public class Loans {
 
     private String loanNumber;
 
+    private String loanType;
+
     private int totalLoan;
 
     private int amountPaid;
