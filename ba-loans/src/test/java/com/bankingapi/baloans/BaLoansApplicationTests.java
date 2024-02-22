@@ -1,4 +1,4 @@
-package comm.bankingapi.baloans;
+package com.bankingapi.baloans;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
