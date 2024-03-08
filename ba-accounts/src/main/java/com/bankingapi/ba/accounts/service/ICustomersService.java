@@ -1,5 +1,7 @@
 package com.bankingapi.ba.accounts.service;
 
+import com.bankingapi.ba.accounts.dto.CustomerDetailsDTO;
+
 public interface ICustomersService {
-    Custo
+    CustomerDetailsDTO fetchCustomerDetails(String mobileNumber);
 }
