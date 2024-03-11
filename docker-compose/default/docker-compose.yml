@@ -54,4 +54,16 @@ loans:
     service: microservice-eureka-config
 
 cards:
-  
+  image: "mounikaperi/cards:c0"
+  container_name: cards-ms
+  ports:
+    - "9000:9000"
+  environment:
+    SPRING_APPLICATION_NAME: "cards"
+  extends:
+    file: common-config.yml
+    service: microservice-eureka-config
+
+networks:
+  eazybank:
+    driver: "bridge"
