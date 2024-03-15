@@ -1,8 +1,8 @@
 server:
-  port: 9000
+  port: 8090
 spring:
   application:
-    name: "ba-cards"
+    name: "ba-loans"
   profiles:
     active: "prod"
   datasource:
@@ -18,8 +18,8 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-  config:
-    import: "optional:configserver:http://localhost:8071/"
+    config:
+      import: "optional:configserver:http://localhost:8071/"
 
 management:
   endpoints:
@@ -38,7 +38,7 @@ endpoints:
     enabled: true
 
 eureka:
-  instance:
+  instace:
     preferIpAddress: true
   client:
     fetchRegistry: true
@@ -48,6 +48,6 @@ eureka:
 
 info:
   app:
-    name: "ba-cards"
-    description: "Eazy Bank Cards Application"
+    name: "ba-loans"
+    description: "EazyBank Loans Application"
     version: "1.0.0"

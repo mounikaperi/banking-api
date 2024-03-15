@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   application:
-    name: "accounts"
+    name: "ba-accounts"
   profiles:
     active: "prod"
   datasource:
@@ -44,10 +44,10 @@ eureka:
     fetchRegistry: true
     registerWithEureka: true
     serviceUrl:
-      defaultZone: http://localhost:8070/eureka
+      defaultZone: http://localhost:8070/eureka/
 
 info:
   app:
-    name: "accounts"
+    name: "ba-accounts"
     description: "Eazy Bank Accounts Application"
     version: "1.0.0"
