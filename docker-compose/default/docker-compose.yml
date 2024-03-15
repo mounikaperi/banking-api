@@ -29,40 +29,40 @@ services:
       file: common-config.yml
       service: microservice-configserver-config
     environment:
-      SPRING_APPLICATION_NAME: "eurekaserver"
+      SPRING_APPLICATION_NAME: "ba-eurekaserver"
 
-accounts:
-  image: "mounikaperi/accounts:a0"
-  container_name: accounts-ms
-  ports:
-    - "8080:8080"
-  environment:
-    SPRING_APPLICATION_NAME: "accounts"
-  extends:
-    file: common-config.yml
-    service: microservice-eureka-config
+  accounts:
+    image: "mounikaperi/accounts:a0"
+    container_name: accounts-ms
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_APPLICATION_NAME: "ba-accounts"
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
 
-loans:
-  image: "mounikaperi/loans:l0"
-  container_name: loans-ms
-  ports:
-    - "8080:8080"
-  environment:
-    SPRING_APPLICATION_NAME: "loans"
-  extends:
-    file: common-config.yml
-    service: microservice-eureka-config
+  loans:
+    image: "mounikaperi/loans:l0"
+    container_name: loans-ms
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_APPLICATION_NAME: "ba-loans"
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
 
-cards:
-  image: "mounikaperi/cards:c0"
-  container_name: cards-ms
-  ports:
-    - "9000:9000"
-  environment:
-    SPRING_APPLICATION_NAME: "cards"
-  extends:
-    file: common-config.yml
-    service: microservice-eureka-config
+  cards:
+    image: "mounikaperi/cards:c0"
+    container_name: cards-ms
+    ports:
+      - "9000:9000"
+    environment:
+      SPRING_APPLICATION_NAME: "ba-cards"
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
 
 networks:
   eazybank:
