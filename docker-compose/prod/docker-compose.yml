@@ -1,0 +1,17 @@
+services:
+  configserver:
+    image: "mounikaperi/configserver:cs0"
+    container_name: configserver-ms
+    ports:
+      - "8071:8071"
+    healthcheck:
+      test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: microservice-base-config
+
+  
