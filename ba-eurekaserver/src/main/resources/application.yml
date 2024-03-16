@@ -1,6 +1,9 @@
+server:
+  port: 8761
+
 spring:
   application:
-    name: "eurekaserver"
+    name: "ba-eurekaserver"
   config:
     import: "optional:configserver:http://localhost:8071/"
 
@@ -18,3 +21,8 @@ management:
     health:
       probes:
         enabled: true
+
+eureka:
+  client:
+    fetchRegistry: 'false'
+    registerWithEureka: 'false'

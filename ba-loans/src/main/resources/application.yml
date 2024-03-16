@@ -38,7 +38,7 @@ endpoints:
     enabled: true
 
 eureka:
-  instace:
+  instance:
     preferIpAddress: true
   client:
     fetchRegistry: true
