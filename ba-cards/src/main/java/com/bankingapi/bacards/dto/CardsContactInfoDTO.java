@@ -11,7 +11,9 @@ import java.util.Map;
 @Getter
 @Setter
 public class CardsContactInfoDTO {
+
     private String message;
     private Map<String, String> contactDetails;
     private List<String> onCallSupport;
+
 }
