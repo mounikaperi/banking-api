@@ -6,15 +6,17 @@ spring:
   profiles:
     active: "prod"
   datasource:
-    url: jdbc:h2:mem:testdb
-    driverClassName: org.h2.Driver
-    username: sa
-    password: ''
+    url: jdbc:mysql://localhost:3306/bankingapi?useSSL=false&useUnicode=yes&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: root
+    password: Mummagirl@123
   h2:
     console:
       enabled: true
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: update
     show-sql: true
