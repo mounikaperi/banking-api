@@ -14,8 +14,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
-import org.apache.coyote.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -30,6 +30,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
 @Validated
 public class CardsController {
+
+    private static final Logger logger = LoggerFactory.getLogger(CardsController.class);
+
     private ICardsService iCardsService;
 
     public CardsController(ICardsService iCardsService) {
@@ -45,7 +48,7 @@ public class CardsController {
     @Autowired
     private CardsContactInfoDTO cardsContactInfoDTO;
 
-    @Operation(summary = "Create Card REST API", description = "REST API to create new Card insie EazyBank")
+    @Operation(summary = "Create Card REST API", description = "REST API to create new Card inside EazyBank")
     @ApiResponses({
        @ApiResponse(responseCode = "201", description = "HTTP Status CREATED"),
        @ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error",
@@ -64,7 +67,8 @@ public class CardsController {
             content = @Content(schema = @Schema(implementation = ErrorResponseDTO.class)))
     })
     @GetMapping("/fetch")
-    public ResponseEntity<CardsDTO> fetchCardDetails(@RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) {
+    public ResponseEntity<CardsDTO> fetchCardDetails(@RequestHeader("eazybank-correlation-id") String correlationId, @RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) {
+        logger.debug("EazyBank-correlation-id found: {}", correlationId);
         CardsDTO cardsDTO = iCardsService.fetchCardDetails(mobileNumber);
         return ResponseEntity.status(HttpStatus.OK).body(cardsDTO);
     }

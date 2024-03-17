@@ -53,3 +53,9 @@ info:
     name: "ba-cards"
     description: "Eazy Bank Cards Application"
     version: "1.0.0"
+
+logging:
+  level:
+    com:
+      bankingapi:
+        ba-cards: DEBUG
