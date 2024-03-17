@@ -1,9 +1,9 @@
 package com.bankingapi.bagatewayserver.filters;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 
-import java.net.http.HttpHeaders;
 import java.util.List;
 
 @Component
@@ -12,8 +12,8 @@ public class FilterUtility {
     public static final String CORRELATION_ID = "eazybank-correlation-id";
 
     public String getCorrelationId(HttpHeaders requestHeaders) {
-        List<String> requestHeaderList = requestHeaders.allValues(CORRELATION_ID);
-        if (requestHeaderList.contains(CORRELATION_ID)) {
+        if (requestHeaders.get(CORRELATION_ID) != null) {
+            List<String> requestHeaderList = requestHeaders.get(CORRELATION_ID);
             return requestHeaderList.stream().findFirst().get();
         }
         return null;
