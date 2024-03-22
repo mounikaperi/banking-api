@@ -5,6 +5,11 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/ba-gatewayserver/pom.xml" />
+        <option value="$PROJECT_DIR$/ba-eurekaserver/pom.xml" />
+        <option value="$PROJECT_DIR$/ba-cards/pom.xml" />
+        <option value="$PROJECT_DIR$/ba-accounts/pom.xml" />
+        <option value="$PROJECT_DIR$/ba-loans/pom.xml" />
+        <option value="$PROJECT_DIR$/configserver/pom.xml" />
       </list>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />
