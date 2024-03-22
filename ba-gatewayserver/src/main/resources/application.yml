@@ -33,3 +33,11 @@ logging:
     com:
       bankingapi:
         ba-gatewayserver: DEBUG
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfState: 2
+      failureRateThreshold: 50
+      waitDurationInOpenState: 10000
