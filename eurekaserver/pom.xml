@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bankingapi</groupId>
-	<artifactId>ba-eurekaserver</artifactId>
+	<artifactId>eurekaserver</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ba-eurekaserver</name>
 	<description>Service Discovery agent for Eazy Bank microservices</description>
