@@ -8,21 +8,21 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="eurekaserver" />
+        <module name="gatewayserver" />
         <module name="configserver" />
         <module name="accounts" />
         <module name="cards" />
         <module name="loans" />
-        <module name="ba-gatewayserver" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="accounts" options="-parameters" />
-      <module name="ba-gatewayserver" options="-parameters" />
       <module name="cards" options="-parameters" />
       <module name="configserver" options="-parameters" />
       <module name="eurekaserver" options="-parameters" />
+      <module name="gatewayserver" options="-parameters" />
       <module name="loans" options="-parameters" />
     </option>
   </component>

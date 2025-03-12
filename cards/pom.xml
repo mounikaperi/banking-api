@@ -13,7 +13,7 @@
 	<artifactId>cards</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<name>ba-cards</name>
+	<name>cards</name>
 	<description>Microservice for Cards</description>
 	<properties>
 		<java.version>21</java.version>

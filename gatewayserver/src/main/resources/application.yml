@@ -1,6 +1,6 @@
 spring:
   application:
-    name: "ba-gatewayserver"
+    name: "gatewayserver"
   config:
     import: "optional:configserver:http://localhost:8071/"
   cloud:
@@ -27,7 +27,7 @@ management:
 
 info:
   app:
-    name: "ba-gatewayserver"
+    name: "gatewayserver"
     description: "Eazy Bank Gateway Server Application"
     version: "1.0.0"
 
@@ -35,7 +35,7 @@ logging:
   level:
     com:
       bankingapi:
-        ba-gatewayserver: DEBUG
+        gatewayserver: DEBUG
 
 resilience4j.circuitbreaker:
   configs:

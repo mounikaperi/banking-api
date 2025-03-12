@@ -75,7 +75,7 @@ logging:
   level:
     com:
       bankingapi:
-        ba-accounts: DEBUG
+        accounts: DEBUG
 
 resilience4j.circuitbreaker:
   configs:

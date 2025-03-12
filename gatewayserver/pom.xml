@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bankingapi</groupId>
-	<artifactId>ba-gatewayserver</artifactId>
+	<artifactId>gatewayserver</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ba-gatewayserver</name>
+	<name>gatewayserver</name>
 	<description>EdgeServer for EazyBank Microservice</description>
 	<properties>
 		<java.version>21</java.version>

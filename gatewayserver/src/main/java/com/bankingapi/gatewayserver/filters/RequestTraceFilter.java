@@ -1,4 +1,4 @@
-package com.bankingapi.bagatewayserver.filters;
+package com.bankingapi.gatewayserver.filters;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package com.bankingapi.bagatewayserver;
+package com.bankingapi.gatewayserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,10 +11,10 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 @SpringBootApplication
-public class BaGatewayserverApplication {
+public class GatewayserverApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BaGatewayserverApplication.class, args);
+		SpringApplication.run(GatewayserverApplication.class, args);
 	}
 
 	@Bean
@@ -26,19 +26,19 @@ public class BaGatewayserverApplication {
 								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
 								.circuitBreaker(config -> config.setName("accountsCircuitBreaker")
 										.setFallbackUri("forward:/contactSupport")))
-						.uri("lb://BA-ACCOUNTS"))
+						.uri("lb://ACCOUNTS"))
 				.route(p -> p
 						.path("/eazybank/loans/**")
 						.filters(f -> f.rewritePath("/eazybank/loans/(?<segment>.*)","/${segment}")
 								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
 								.retry(retryConfig -> retryConfig.setRetries(3).setMethods(HttpMethod.GET)
 										.setBackoff(Duration.ofMillis(100), Duration.ofMillis(1000), 2, true)))
-						.uri("lb://BA-LOANS"))
+						.uri("lb://LOANS"))
 				.route(p -> p
 						.path("/eazybank/cards/**")
 						.filters(f -> f.rewritePath("/eazybank/cards/(?<segment>.*)","/${segment}")
 								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
-						.uri("lb://BA-CARDS")).build();
+						.uri("lb://CARDS")).build();
 	}
 
 }

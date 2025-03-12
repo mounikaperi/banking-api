@@ -63,7 +63,7 @@ eureka:
 
 info:
   app:
-    name: "ba-loans"
+    name: "loans"
     description: "Eazy Bank Loans Application"
     version: "1.0.0"
 
@@ -71,4 +71,4 @@ logging:
   level:
     com:
       bankingapi:
-        ba-loans: DEBUG
+        loans: DEBUG
