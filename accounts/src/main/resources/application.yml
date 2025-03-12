@@ -1,8 +1,8 @@
 server:
-  port: 8081
+  port: 8080
 spring:
   application:
-    name: "ba-cards"
+    name: "accounts"
   profiles:
     active: "prod"
   datasource:
@@ -27,15 +27,27 @@ spring:
     port: 5672
     username: "guest"
     password: "guest"
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
 
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
   endpoint:
     shutdown:
       enabled: true
+    health:
+      probes:
+        enabled: true
   info:
     env:
       enabled: true
@@ -55,12 +67,20 @@ eureka:
 
 info:
   app:
-    name: "ba-cards"
-    description: "Eazy Bank Cards Application"
+    name: "accounts"
+    description: "Eazy Bank Accounts Application"
     version: "1.0.0"
 
 logging:
   level:
     com:
       bankingapi:
-        ba-cards: DEBUG
+        ba-accounts: DEBUG
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfState: 2
+      failureRateThreshold: 50
+      waitDurationInOpenState: 10000

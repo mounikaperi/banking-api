@@ -7,9 +7,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ba-accounts" />
         <module name="ba-loans" />
         <module name="configserver" />
+        <module name="accounts" />
         <module name="ba-eurekaserver" />
         <module name="ba-gatewayserver" />
         <module name="ba-cards" />
@@ -18,7 +18,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="ba-accounts" options="-parameters" />
+      <module name="accounts" options="-parameters" />
       <module name="ba-cards" options="-parameters" />
       <module name="ba-eurekaserver" options="-parameters" />
       <module name="ba-gatewayserver" options="-parameters" />
