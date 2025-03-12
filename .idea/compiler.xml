@@ -10,19 +10,19 @@
         <module name="ba-loans" />
         <module name="configserver" />
         <module name="accounts" />
+        <module name="cards" />
         <module name="ba-eurekaserver" />
         <module name="ba-gatewayserver" />
-        <module name="ba-cards" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="accounts" options="-parameters" />
-      <module name="ba-cards" options="-parameters" />
       <module name="ba-eurekaserver" options="-parameters" />
       <module name="ba-gatewayserver" options="-parameters" />
       <module name="ba-loans" options="-parameters" />
+      <module name="cards" options="-parameters" />
       <module name="configserver" options="-parameters" />
     </option>
   </component>
