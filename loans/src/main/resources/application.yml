@@ -10,9 +10,9 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     username: root
     password: Mummagirl@123
-  h2:
-    console:
-      enabled: true
+  sql:
+    init:
+      mode: always
   jpa:
     properties:
       hibernate:
