@@ -56,4 +56,23 @@ Event Driven Asynchronous Communication:
 Container Orchestration:
 
 
+Docker Commands To Create Microservice Images:
+
+    - docker version
+    - To build the microservice and create a jar: mvn clean install 
+    - To run the jar: mvn spring-boot:run
+    - 
+
+Dev Smoke Test Results
+
+Microservices Registered in Netflix Eureka Server:
+
+![image](https://github.com/user-attachments/assets/3bf1784b-347b-4e26-ab41-208dee066486)
+
+API Gateway server: One way entry to all the microservices with retry Pattern added upon failures
+
+![image](https://github.com/user-attachments/assets/ff130fe8-ae3c-44e1-be1d-d44ccb07eb62)
+
+
+
 
