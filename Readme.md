@@ -73,6 +73,14 @@ API Gateway server: One way entry to all the microservices with retry Pattern ad
 
 ![image](https://github.com/user-attachments/assets/ff130fe8-ae3c-44e1-be1d-d44ccb07eb62)
 
+Scenario-1: Customer has created an account and has no credit/debit cards and no loans
 
+![image](https://github.com/user-attachments/assets/cb93f22f-fd95-41c0-a3e4-da8e8868f44c)
+
+Scenario-2: Customer has account in the bank and has a home loan no credit/debit cards
+
+![image](https://github.com/user-attachments/assets/2402843d-f68c-4dcd-ae1a-ccd40b5c3855)
+
+Scenario-3: Customer has account in the bank, has a home loan, has both credit and debit cards
 
 
