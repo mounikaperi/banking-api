@@ -31,4 +31,6 @@ public class Loans extends BaseEntity {
 
     private int outstandingAmount;
 
+    private int loanStatus;
+
 }

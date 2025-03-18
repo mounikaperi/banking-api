@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Schema(name = "CustomerDetails", description = "Schema to hold Customer, Account, Cards, Loans information")
 public class CustomerDetailsDTO {
@@ -29,8 +31,8 @@ public class CustomerDetailsDTO {
     private AccountsDTO accountsDTO;
 
     @Schema(description = "Loan details of the customer")
-    private LoansDTO loansDTO;
+    private List<LoansDTO> loansDTO;
 
     @Schema(description = "Card details of the customer")
-    private CardsDTO cardsDTO;
+    private List<CardsDTO> cardsDTO;
 }

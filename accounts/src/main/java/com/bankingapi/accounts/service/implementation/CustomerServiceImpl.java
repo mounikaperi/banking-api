@@ -14,9 +14,14 @@ import com.bankingapi.accounts.repository.CustomerRepository;
 import com.bankingapi.accounts.service.ICustomersService;
 import com.bankingapi.accounts.service.client.CardsFeignClient;
 import com.bankingapi.accounts.service.client.LoansFeignClient;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -37,11 +42,11 @@ public class CustomerServiceImpl implements ICustomersService {
         );
         CustomerDetailsDTO customerDetailsDTO = CustomerMapper.mapToCustomerDetailsDTO(customer, new CustomerDetailsDTO());
         customerDetailsDTO.setAccountsDTO(AccountsMapper.mapToAccountsDTO(accounts, new AccountsDTO()));
-        ResponseEntity<LoansDTO> loansDTOResponseEntity = loansFeignClient.fetchLoanDetails(correlationId,mobileNumber);
+        ResponseEntity<List<LoansDTO>> loansDTOResponseEntity = loansFeignClient.fetchLoanDetails(correlationId,mobileNumber);
         if (loansDTOResponseEntity != null) {
             customerDetailsDTO.setLoansDTO(loansDTOResponseEntity.getBody());
         }
-        ResponseEntity<CardsDTO> cardsDTOResponseEntity = cardsFeignClient.fetchCardDetails(correlationId, mobileNumber);
+        ResponseEntity<List<CardsDTO>> cardsDTOResponseEntity = cardsFeignClient.fetchCardDetails(correlationId, mobileNumber);
         if (cardsDTOResponseEntity != null) {
             customerDetailsDTO.setCardsDTO(cardsDTOResponseEntity.getBody());
         }

@@ -64,3 +64,6 @@ logging:
     com:
       bankingapi:
         cards: DEBUG
+
+build:
+  version: "1.0"
