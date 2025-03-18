@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 public class CardsFallback implements CardsFeignClient {
     @Override
     public ResponseEntity<CardsDTO> fetchCardDetails(String correlationId, String mobileNumber) {
-        return null;
+        CardsDTO cardsDTO = new CardsDTO();
+        cardsDTO.setMessage("Unable to fetch card details of the customer. Please try again!!");
+        return ResponseEntity.ok(cardsDTO);
     }
 }

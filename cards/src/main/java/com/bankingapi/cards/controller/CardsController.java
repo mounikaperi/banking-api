@@ -25,6 +25,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(name = "CRUD REST APIs for cards in EazyBank", description = "CRUD REST APIs in EazyBank to CREATE, FETCH and DELETE card details")
 @RestController
 @RequestMapping(path = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -55,8 +57,8 @@ public class CardsController {
           content = @Content(schema = @Schema(implementation = ErrorResponseDTO.class)))
     })
     @PostMapping("/create")
-    public ResponseEntity<ResponseDTO> createCard(@Valid @RequestParam @Pattern(regexp="(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) {
-        iCardsService.createCard(mobileNumber);
+    public ResponseEntity<ResponseDTO> createCard(@Valid @RequestBody CardsDTO cardsDTO) {
+        iCardsService.createCard(cardsDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseDTO(CardsConstants.STATUS_201, CardsConstants.MESSAGE_201));
     }
 
@@ -67,9 +69,15 @@ public class CardsController {
             content = @Content(schema = @Schema(implementation = ErrorResponseDTO.class)))
     })
     @GetMapping("/fetch")
-    public ResponseEntity<CardsDTO> fetchCardDetails(@RequestHeader("eazybank-correlation-id") String correlationId, @RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) {
+    public ResponseEntity<List<CardsDTO>> fetchCardDetails(@RequestHeader("eazybank-correlation-id") String correlationId, @RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) {
         logger.debug("EazyBank-correlation-id found: {}", correlationId);
-        CardsDTO cardsDTO = iCardsService.fetchCardDetails(mobileNumber);
+        List<CardsDTO> cardsDTO = iCardsService.fetchCardDetails(mobileNumber);
+        if (cardsDTO.isEmpty()) {
+            CardsDTO cardsDTO1 = new CardsDTO();
+            cardsDTO1.setMessage("Customer has neither credit card nor debit card");
+            List<CardsDTO> cardsDTOS = List.of(cardsDTO1);
+            return ResponseEntity.status(HttpStatus.OK).body(cardsDTOS);
+        }
         return ResponseEntity.status(HttpStatus.OK).body(cardsDTO);
     }
 
@@ -87,22 +95,6 @@ public class CardsController {
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseDTO(CardsConstants.STATUS_200, CardsConstants.MESSAGE_200));
         }
         return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseDTO(CardsConstants.STATUS_417, CardsConstants.MESSAGE_417_UPDATE));
-    }
-
-    @Operation(summary = "Delete Card Details REST API", description = "REST API to delete card details based on mobile number")
-    @ApiResponses({
-       @ApiResponse(responseCode = "200", description = "HTTP Status OK"),
-       @ApiResponse(responseCode = "417", description = "Expectation Failed"),
-       @ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error",
-            content = @Content(schema = @Schema(implementation = ErrorResponseDTO.class)))
-    })
-    @DeleteMapping("/delete")
-    public ResponseEntity<ResponseDTO> deleteCardDetails(@RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile Number must be 10 digits") String mobileNumber) {
-        boolean isDeleted = iCardsService.deleteCard(mobileNumber);
-        if (isDeleted) {
-            return ResponseEntity.status(HttpStatus.OK).body(new ResponseDTO(CardsConstants.STATUS_200, CardsConstants.MESSAGE_200));
-        }
-        return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseDTO(CardsConstants.STATUS_417, CardsConstants.MESSAGE_417_DELETE));
     }
 
     @Operation(summary = "Get Build Information", description = "Get Build Information that is deployed into cards microservice")

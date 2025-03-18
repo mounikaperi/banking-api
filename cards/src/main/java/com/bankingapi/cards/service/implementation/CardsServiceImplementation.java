@@ -9,10 +9,13 @@ import com.bankingapi.cards.mapper.CardsMapper;
 import com.bankingapi.cards.repository.CardsRepository;
 import com.bankingapi.cards.service.ICardsService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Stream;
 
 @Service
 @AllArgsConstructor
@@ -21,32 +24,36 @@ public class CardsServiceImplementation implements ICardsService {
     private CardsRepository cardsRepository;
 
     @Override
-    public void createCard(String mobileNumber) {
-        Optional<Cards> optionalCards = cardsRepository.findByMobileNumber(mobileNumber);
-        if (optionalCards.isPresent()) {
+    public void createCard(CardsDTO cardsDTO) {
+        String mobileNumber = cardsDTO.getMobileNumber();
+        List<Cards> cards = cardsRepository.findByMobileNumber(mobileNumber);
+        if (cards.contains(cardsDTO.getCardType())) {
             throw new CardAlreadyExistsException("Card already registered with the given mobile number" + mobileNumber);
         }
-        cardsRepository.save(createNewCard(mobileNumber));
+        cardsRepository.save(createNewCard(cardsDTO));
     }
 
 
-    private Cards createNewCard(String mobileNumber) {
+    private Cards createNewCard(CardsDTO cardsDTO) {
         Cards newCard = new Cards();
-        newCard.setMobileNumber(mobileNumber);
+        newCard.setMobileNumber(cardsDTO.getMobileNumber());
         long generatedCardNumber = 1000000000000L + new Random().nextInt(900000000);
         newCard.setCardNumber(Long.toString(generatedCardNumber));
-        newCard.setCardType(CardsConstants.CREDIT_CARD);
+        newCard.setCardType(cardsDTO.getCardType());
         newCard.setTotalLimit(CardsConstants.NEW_CARD_LIMIT);
         newCard.setAmountUsed(0);
         newCard.setAvailableAmount(CardsConstants.NEW_CARD_LIMIT);
+        newCard.setActive(true);
         return newCard;
     }
 
-    public CardsDTO fetchCardDetails(String mobileNumber) {
-        Cards cards = cardsRepository.findByMobileNumber(mobileNumber).orElseThrow(
-                () -> new ResourceNotFoundException("Card", "mobileNumber", mobileNumber)
-        );
-        return CardsMapper.mapToCardsDTO(cards, new CardsDTO());
+    public List<CardsDTO> fetchCardDetails(String mobileNumber) {
+        List<Cards> cards = cardsRepository.findByMobileNumber(mobileNumber);
+        if (!cards.isEmpty()) {
+            Stream<CardsDTO> mappedCards = cards.stream().map((currentCard) -> CardsMapper.mapToCardsDTO(currentCard, new CardsDTO()));
+            return mappedCards.toList();
+        }
+        return List.of();
     }
 
     public boolean updateCard(CardsDTO cardsDTO) {
@@ -55,13 +62,6 @@ public class CardsServiceImplementation implements ICardsService {
         );
         CardsMapper.mapToCards(cardsDTO, cards);
         cardsRepository.save(cards);
-        return true;
-    }
-    public boolean deleteCard(String mobileNumber) {
-        Cards cards = cardsRepository.findByMobileNumber(mobileNumber).orElseThrow(
-                () -> new ResourceNotFoundException("Card", "mobileNumber", mobileNumber)
-        );
-        cardsRepository.deleteById(cards.getCardId());
         return true;
     }
 }

@@ -18,26 +18,25 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableConfigurationProperties(value = {AccountsContactInfoDTO.class})
 @OpenAPIDefinition(
 		info = @Info(
-				title = "Accounts microservice REST API documentation",
+				title = "Accounts microservice REST API Documentation",
 				description = "EazyBank Accounts microservice REST API Documentation",
 				version = "v1",
 				contact = @Contact(
 						name = "Sai Mounika Peri",
 						email = "xyz@gmail.com",
-						url = "https://www/xyz.com"
+						url = "https://www.eazybytes.com"
 				),
 				license = @License(
 						name = "Apache 2.0",
-						url = "https://www.xyz.com"
+						url = "https://www.eazybytes.com"
 				)
 		),
 		externalDocs = @ExternalDocumentation(
-				description = "EazyBank Accounts Microservice REST API Documentation",
-				url = "https://www.xyz.com/swagger-ui.html"
+				description =  "EazyBank Accounts microservice REST API Documentation",
+				url = "https://www.eazybytes.com/swagger-ui.html"
 		)
 )
 public class AccountsApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(AccountsApplication.class, args);
 	}

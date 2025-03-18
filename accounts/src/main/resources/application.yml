@@ -10,9 +10,6 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     username: root
     password: Mummagirl@123
-  h2:
-    console:
-      enabled: true
   jpa:
     properties:
       hibernate:
@@ -84,3 +81,6 @@ resilience4j.circuitbreaker:
       permittedNumberOfCallsInHalfState: 2
       failureRateThreshold: 50
       waitDurationInOpenState: 10000
+
+build:
+  version: "1.0"

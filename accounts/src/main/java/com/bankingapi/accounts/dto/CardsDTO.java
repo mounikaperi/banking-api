@@ -1,5 +1,6 @@
 package com.bankingapi.accounts.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
@@ -9,6 +10,7 @@ import lombok.Data;
 
 @Schema(name = "Cards", description = "Schema to hold Card information")
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CardsDTO {
 
     @NotEmpty(message = "MobileNumber cannot be null or empty")
@@ -27,13 +29,16 @@ public class CardsDTO {
 
     @Positive(message = "Total card limit should be greater than zero")
     @Schema(description = "Total amount limit available against a card", example = "100000")
-    private int totalLimit;
+    private Integer totalLimit;
 
     @PositiveOrZero(message = "Total amount used should be equal or greater than zero")
     @Schema(description = "Total amount used by the customer", example = "1000")
-    private int amountUsed;
+    private Integer amountUsed;
 
     @PositiveOrZero(message = "Total available amount should be equal or greater than zero")
     @Schema(description = "Total available amount against a card", example = "99000")
-    private int availableAmount;
+    private Integer availableAmount;
+
+    @Schema(description = "Display Message in case cards microservice is down", example="Unable to fetch card details of customer. Please try again!!")
+    private String message;
 }

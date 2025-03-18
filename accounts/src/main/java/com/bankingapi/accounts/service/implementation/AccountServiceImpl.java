@@ -33,7 +33,7 @@ public class AccountServiceImpl implements IAccountsService {
             throw new CustomerAlreadyExistsException("Customer is already registered with given mobileNumber " + customerDTO.getMobileNumber());
         }
         Customer savedCustomer = customerRepository.save(customer);
-//        accountsRepository.save(createNewAccount(savedCustomer));
+        accountsRepository.save(createNewAccount(savedCustomer));
     }
 
     private Accounts createNewAccount(Customer customer) {

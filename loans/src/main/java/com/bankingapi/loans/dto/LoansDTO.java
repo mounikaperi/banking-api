@@ -1,5 +1,6 @@
 package com.bankingapi.loans.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
@@ -9,6 +10,7 @@ import lombok.Data;
 
 @Data
 @Schema(name = "Loans", description = "Schema to hold loan information")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class LoansDTO {
 
     @NotEmpty(message = "MobileNumber cannot be null or empty")
@@ -16,8 +18,8 @@ public class LoansDTO {
     @Schema(description = "MobileNumber of customer", example="9876543210")
     private String mobileNumber;
 
-    @NotEmpty(message = "LoanNumber cannot be null or empty")
-    @Pattern(regexp = "(^$|[0-9]{12})", message = "LoanNumber must be 12 digits")
+//    @NotEmpty(message = "LoanNumber cannot be null or empty")
+    @Pattern(regexp = "(^$|[0-9]{13})", message = "LoanNumber must be 13 digits")
     @Schema(description = "Loan Number of the customer", example = "123456789012")
     private String loanNumber;
 
@@ -27,13 +29,16 @@ public class LoansDTO {
 
     @Positive(message = "Total loan amount should be greater than zero")
     @Schema(description = "Total loan amount", example = "100000")
-    private int totalLoan;
+    private Integer totalLoan;
 
     @PositiveOrZero(message = "Total loan amount paid should be equal or greater than zero")
     @Schema(description = "Total loan amount paid", example = "1000")
-    private int amountPaid;
+    private Integer amountPaid;
 
     @PositiveOrZero(message = "Total outstanding amount should be equal or greater than zero")
     @Schema(description = "Total outstanding amount against a loan", example = "99000")
-    private int outstandingAmount;
+    private Integer outstandingAmount;
+
+    @Schema(description = "Message to be displayed if customer has no loan", example = "Customer has no loans")
+    private String message;
 }

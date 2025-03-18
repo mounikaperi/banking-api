@@ -2,9 +2,10 @@ package com.bankingapi.cards.service;
 
 import com.bankingapi.cards.dto.CardsDTO;
 
+import java.util.List;
+
 public interface ICardsService {
-    void createCard(String mobileNumber);
-    CardsDTO fetchCardDetails(String mobileNumber);
+    void createCard(CardsDTO cardsDTO);
+    List<CardsDTO> fetchCardDetails(String mobileNumber);
     boolean updateCard(CardsDTO cardsDTO);
-    boolean deleteCard(String mobileNumber);
 }
