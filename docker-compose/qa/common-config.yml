@@ -3,6 +3,14 @@ services:
     networks:
       - eazybank
 
+  microservice-base-config:
+    extends:
+      service: network-deploy-service
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+
   microservice-db-config:
     extends:
       service: network-deploy-service
@@ -16,14 +24,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
 
-  microservice-base-config:
-    extends:
-      service: network-deploy-service
-    deploy:
-      resources:
-        limits:
-          memory: 700m
-
   microservice-configserver-config:
     extends:
       service: microservice-base-config
@@ -32,3 +32,9 @@ services:
       SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
+
+  microservice-eureka-config:
+    extends:
+      service: microservice-configserver-config
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
