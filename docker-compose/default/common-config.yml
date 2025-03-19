@@ -3,6 +3,15 @@ services:
     networks:
       - eazybank
 
+  microservice-base-config:
+    extends:
+      service: network-deploy-service
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+
+
   microservice-db-config:
     extends:
       service: network-deploy-service
@@ -15,14 +24,6 @@ services:
       start_period: 10s
     environment:
       MYSQL_ROOT_PASSWORD: root
-
-  microservice-base-config:
-    extends:
-      service: network-deploy-service
-    deploy:
-      resources:
-        limits:
-          memory: 700m
 
   microservice-configserver-config:
     extends:

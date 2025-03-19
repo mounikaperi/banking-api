@@ -1,5 +1,3 @@
-server:
-  port: 8072
 spring:
   application:
     name: "gatewayserver"
@@ -13,7 +11,13 @@ spring:
           lowerCaseServiceId: true
       httpclient:
         connect-timeout: 1000
-        response-timeout: 5s
+        response-timeout: 2s
+  data:
+    redis:
+      connect-timeout: 2s
+      host: localhost
+      port: 6379
+      timeout: 1s
 
 management:
   endpoints:
@@ -22,7 +26,7 @@ management:
         include: "*"
   endpoint:
     gateway:
-      enabled: true
+      access: unrestricted
   info:
     env:
       enabled: true
@@ -36,13 +40,13 @@ info:
 logging:
   level:
     com:
-      bankingapi:
+      eazybytes:
         gatewayserver: DEBUG
 
 resilience4j.circuitbreaker:
   configs:
     default:
       slidingWindowSize: 10
-      permittedNumberOfCallsInHalfState: 2
+      permittedNumberOfCallsInHalfOpenState: 2
       failureRateThreshold: 50
       waitDurationInOpenState: 10000
