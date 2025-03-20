@@ -1,0 +1,30 @@
+services:
+  accounts:
+    image: mounikaperi/accounts:a0
+    container_name: accounts-ms
+    ports:
+      - "8080:8080"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+
+  loans:
+    image: mounikaperi/loans:l0
+    container_name: loans-ms
+    ports:
+      - "8081:8081"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+
+  cards:
+    image: mounikaperi/cards:c0
+    container_name: cards-ms
+    ports:
+      - "8082:8082"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
