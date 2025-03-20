@@ -10,11 +10,11 @@ services:
       resources:
         limits:
           memory: 700m
-    environment:
-      JAVA_TOOL_OPTIONS: "-javaagent:/app/libs/opentelemetry-javaagent-2.11.0.jar"
-      OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4318
-      OTEL_METRICS_EXPORTER: none
-      OTEL_LOGS_EXPORTER: none
+#    environment:
+#      JAVA_TOOL_OPTIONS: "-javaagent:/app/libs/opentelemetry-javaagent-2.11.0.jar"
+#      OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo:4318
+#      OTEL_METRICS_EXPORTER: none
+#      OTEL_LOGS_EXPORTER: none
 
   microservice-db-config:
     extends:
@@ -27,14 +27,11 @@ services:
       interval: 10s
       start_period: 10s
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: Mummagirl@123
 
   microservice-configserver-config:
     extends:
       service: microservice-base-config
-    depends_on:
-      configserver:
-        condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: default
       SPRING_CONFIG_IMPORT: configserver:http://configserver:8071
@@ -42,8 +39,5 @@ services:
   microservice-eureka-config:
     extends:
       service: microservice-configserver-config
-    depends-on:
-      eureka-server:
-        condition: service_healthy
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka

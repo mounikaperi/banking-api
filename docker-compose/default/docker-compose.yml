@@ -86,7 +86,7 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ../observability/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ../observability/prometheus/prometheus.yml:/etc/prometheus/prometheus.yaml
     extends:
       file: common-config.yml
       service: network-deploy-service
@@ -229,7 +229,7 @@ services:
   accountsdb:
     container_name: accountsdb
     ports:
-      - "3306:3306"
+      - "3310:3306"
     environment:
       MYSQL_DATABASE: accountsdb
     extends:
@@ -284,6 +284,12 @@ services:
         condition: service_healthy
       configserver:
         condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
+      interval: 20s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
     extends:
       file: common-config.yml
       service: microservice-configserver-config
@@ -301,6 +307,12 @@ services:
         condition: service_healthy
       configserver:
         condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:8090/actuator/health/readiness | grep UP || exit 1"
+      interval: 20s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
     extends:
       file: common-config.yml
       service: microservice-configserver-config
@@ -313,14 +325,20 @@ services:
     environment:
       SPRING_APPLICATION_NAME: "cards"
       SPRING_DATASOURCE_URL: "jdbc:mysql://cardsdb:3306/cardsdb"
-      depends_on:
-        cardsdb:
-          condition: service_healthy
-        configserver:
-          condition: service_healthy
-      extends:
-        file: common-config.yml
-        service: microservice-configserver-config
+    depends_on:
+      cardsdb:
+        condition: service_healthy
+      configserver:
+        condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:9000/actuator/health/readiness | grep UP || exit 1"
+      interval: 20s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
 
   eurekaserver:
     image: "mounikaperi/eurekaserver:es0"
@@ -340,7 +358,7 @@ services:
       SPRING_APPLICATION_NAME: "eurekaserver"
 
   gatewayserver:
-    image: "eazybytes/gatewayserver:gs0"
+    image: "mounikaperi/gatewayserver:gs0"
     container_name: gatewayserver-ms
     ports:
       - "8072:8072"

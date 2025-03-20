@@ -63,8 +63,11 @@
 				<artifactId>jib-maven-plugin</artifactId>
 				<version>3.4.1</version>
 				<configuration>
+					<from>
+						<image>eclipse-temurin:21-jdk</image>
+					</from>
 					<to>
-						<image>mounikaperi/${project.artifactId}:s0</image>
+						<image>mounikaperi/${project.artifactId}:cs0</image>
 					</to>
 				</configuration>
 			</plugin>

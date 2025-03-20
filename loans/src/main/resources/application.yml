@@ -9,10 +9,7 @@ spring:
     url: jdbc:mysql://localhost:3306/bankingapi?useSSL=false&useUnicode=yes&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&serverTimezone=UTC
     driverClassName: com.mysql.cj.jdbc.Driver
     username: root
-    password: Mummagirl@123
-  sql:
-    init:
-      mode: always
+    password: Mummagirl@123s
   jpa:
     properties:
       hibernate:
