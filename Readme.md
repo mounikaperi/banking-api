@@ -1,22 +1,3 @@
-Skills:
-
-    Building Microservices:
-      - Spring Boot - REST APIs - Spring Data JPA - Open API Documentation and Swagger - Generate Docker Images with DockerFile, Buildpacks, Google Jib  - 12 Factor and 15 Factor Methodologies
-    Centrailzed Configuration Management for Spring Microservices
-      - Spring Boot Profiles - Spring Cloud Config - Spring Cloud Bus - Spring Cloud Monitor - Liveness and Readiness Probes - MySQL
-    Spring Microservices Registration and Discovery:
-      - Service Discovery and Service Registration using Netflix Eureka Client
-    Spring Cloud API Gateway:
-      - Load Balancing - Spring Cloud Gateway - Cross Cutting Concerns, Tracing, Logging using Gateway server - Resiliency using Circuit Breaker Pattern - Implementing Retry Pattern in Gateway server
-      - Implementing Redis Rate Limiter in Gateway server - Bulkhead Pattern
-    Observability and Monitoring of Microservices:
-       Logging using Grafana Loki and Promtail. - Metrics monitoring using Actuator, Micrometer, Prometheus and Grafana - Creating and sending Alert notifications using Grafana
-      - Distributed Tracing using OpenTelemetry, Grafana and Tempo
-    Microservices Security:
-      - Oauth2 and OpenID - IAM and KeyCloak - Securing Gateway as a resource service - Authentication and Authorization Code Grant type inside Gateway server
-    Event Driven Asynchronous Communication:
-      - Pub Sub Model - RabbitMq - Spring Cloud Functions - Spring Cloud Streams - Async communication using Apache Kafka
-
 Dev Smoke Test Results
 
 Microservices Registered in Netflix Eureka Server:
@@ -42,6 +23,36 @@ Scenario-3: Customer has account, a home loadn and no card
 Integrated all microservices logging to Grafana
 
 ![image](https://github.com/user-attachments/assets/a11f394e-4095-4c7e-9934-300db8640b11)
+
+Integrated all microservices to Prometheus - which states metrics and graphs of microservice health Example: Metrics via Prometheus: System CPU Usage Metrics
+
+![image](https://github.com/user-attachments/assets/aa2f3b55-c0a0-4cfa-86d1-17666502c065)
+
+Integration of microservices with Micrometer
+
+![image](https://github.com/user-attachments/assets/98eb035f-68cd-410d-b6ad-54e4c8cca2d7)
+
+
+Skills:
+
+    Building Microservices:
+      - Spring Boot - REST APIs - Spring Data JPA - Open API Documentation and Swagger - Generate Docker Images with DockerFile, Buildpacks, Google Jib  - 12 Factor and 15 Factor Methodologies
+    Centrailzed Configuration Management for Spring Microservices
+      - Spring Boot Profiles - Spring Cloud Config - Spring Cloud Bus - Spring Cloud Monitor - Liveness and Readiness Probes - MySQL
+    Spring Microservices Registration and Discovery:
+      - Service Discovery and Service Registration using Netflix Eureka Client
+    Spring Cloud API Gateway:
+      - Load Balancing - Spring Cloud Gateway - Cross Cutting Concerns, Tracing, Logging using Gateway server - Resiliency using Circuit Breaker Pattern - Implementing Retry Pattern in Gateway server
+      - Implementing Redis Rate Limiter in Gateway server - Bulkhead Pattern
+    Observability and Monitoring of Microservices:
+       Logging using Grafana Loki and Promtail. - Metrics monitoring using Actuator, Micrometer, Prometheus and Grafana - Creating and sending Alert notifications using Grafana
+      - Distributed Tracing using OpenTelemetry, Grafana and Tempo
+    Microservices Security:
+      - Oauth2 and OpenID - IAM and KeyCloak - Securing Gateway as a resource service - Authentication and Authorization Code Grant type inside Gateway server
+    Event Driven Asynchronous Communication:
+      - Pub Sub Model - RabbitMq - Spring Cloud Functions - Spring Cloud Streams - Async communication using Apache Kafka
+
+
 
 
 
