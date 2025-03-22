@@ -332,7 +332,7 @@ services:
     image: "mounikaperi/loans:l0"
     container_name: loans-ms
     ports:
-      - "8090:8090"
+      - "8082:8082"
     environment:
       SPRING_APPLICATION_NAME: "loans"
       SPRING_DATASOURCE_URL: "jdbc:mysql://loansdb:3306/loansdb"
@@ -345,7 +345,7 @@ services:
       eurekaserver:
         condition: service_healthy
     healthcheck:
-      test: "curl --fail --silent localhost:8090/actuator/health/readiness | grep UP || exit 1"
+      test: "curl --fail --silent localhost:8082/actuator/health/readiness | grep UP || exit 1"
       interval: 20s
       timeout: 5s
       retries: 20
@@ -358,7 +358,7 @@ services:
     image: "mounikaperi/cards:c0"
     container_name: cards-ms
     ports:
-      - "9000:9000"
+      - "8081:8081"
     depends_on:
       cardsdb:
         condition: service_healthy
@@ -367,7 +367,7 @@ services:
       eurekaserver:
         condition: service_healthy
     healthcheck:
-      test: "curl --fail --silent localhost:9000/actuator/health/readiness | grep UP || exit 1"
+      test: "curl --fail --silent localhost:8081/actuator/health/readiness | grep UP || exit 1"
       interval: 20s
       timeout: 5s
       retries: 20
