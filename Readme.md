@@ -52,6 +52,11 @@ Scenario-3: Customer has account, a home loadn and no card
 
 ![image](https://github.com/user-attachments/assets/4268b3af-dd01-488f-9c43-6ea2743057e3)
 
+Integrated all microservices logging to Grafana
+
+![image](https://github.com/user-attachments/assets/a11f394e-4095-4c7e-9934-300db8640b11)
+
+
 
 
 
