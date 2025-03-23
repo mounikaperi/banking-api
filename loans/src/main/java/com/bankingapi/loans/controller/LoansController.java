@@ -76,7 +76,7 @@ public class LoansController {
             LoansDTO loansDTO = new LoansDTO();
             loansDTO.setMessage("The customer has no loans");
             noLoans.add(loansDTO);
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(noLoans);
+            return ResponseEntity.status(HttpStatus.OK).body(noLoans);
         }
         return ResponseEntity.status(HttpStatus.OK).body(allLoans);
     }
