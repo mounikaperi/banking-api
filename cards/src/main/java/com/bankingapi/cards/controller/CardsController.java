@@ -70,7 +70,7 @@ public class CardsController {
     })
     @GetMapping("/fetch")
     public ResponseEntity<List<CardsDTO>> fetchCardDetails(@RequestHeader("eazybank-correlation-id") String correlationId, @RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits") String mobileNumber) {
-        logger.debug("EazyBank-correlation-id found: {}", correlationId);
+        logger.debug("fetchCardDetails invoked -start");
         List<CardsDTO> cardsDTO = iCardsService.fetchCardDetails(mobileNumber);
         if (cardsDTO.isEmpty()) {
             CardsDTO cardsDTO1 = new CardsDTO();
@@ -78,6 +78,7 @@ public class CardsController {
             List<CardsDTO> cardsDTOS = List.of(cardsDTO1);
             return ResponseEntity.status(HttpStatus.OK).body(cardsDTOS);
         }
+        logger.debug("fetchCardDetails invoked -end");
         return ResponseEntity.status(HttpStatus.OK).body(cardsDTO);
     }
 
