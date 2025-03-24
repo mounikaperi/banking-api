@@ -1,4 +1,17 @@
 services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0.7
+    container_name: keycloak
+    ports:
+      - "7080:8080"
+    environment:
+      KEYCLOAK_ADMIN: "admin"
+      KEYCLOAK_ADMIN_PASSWORD: "admin"
+    command: "start-dev"
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
   read:
     image: grafana/loki:3.1.2
     command: "-config.file=/etc/loki/config.yaml -target=read"
@@ -260,7 +273,6 @@ services:
       file: common-config.yml
       service: microservice-db-config
 
-
   configserver:
     image: "mounikaperi/configserver:cs0"
     container_name: configserver-ms
@@ -305,8 +317,6 @@ services:
   accounts:
     image: "mounikaperi/accounts:a0"
     container_name: accounts-ms
-    ports:
-      - "8080:8080"
     environment:
       SPRING_APPLICATION_NAME: "accounts"
       SPRING_DATASOURCE_URL: "jdbc:mysql://accountsdb:3306/accountsdb"
@@ -331,8 +341,6 @@ services:
   loans:
     image: "mounikaperi/loans:l0"
     container_name: loans-ms
-    ports:
-      - "8082:8082"
     environment:
       SPRING_APPLICATION_NAME: "loans"
       SPRING_DATASOURCE_URL: "jdbc:mysql://loansdb:3306/loansdb"
@@ -357,8 +365,6 @@ services:
   cards:
     image: "mounikaperi/cards:c0"
     container_name: cards-ms
-    ports:
-      - "8081:8081"
     depends_on:
       cardsdb:
         condition: service_healthy
@@ -395,6 +401,7 @@ services:
     environment:
       SPRING_APPLICATION_NAME: "gatewayserver"
       OTEL_SERVICE_NAME: "gatewayserver"
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK-SET-URI: "http://keycloak:8080/realms/master/protocol/openid-connect/certs"
     extends:
       file: common-config.yml
       service: microservice-eureka-config
