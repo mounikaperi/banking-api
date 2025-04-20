@@ -1,5 +1,6 @@
 package com.vaultsystem.user.service;
 
+import com.vaultsystem.user.config.UserConfig;
 import com.vaultsystem.user.dto.UserDTO;
 import com.vaultsystem.user.exceptions.UserAlreadyExistsException;
 import com.vaultsystem.user.model.User;
@@ -24,6 +25,8 @@ public class UserServiceImpl implements UserService {
                 userDTO.getCity(), userDTO.getPostalCode(), userDTO.getDateOfBirth());
         String hashedPassword = passwordEncoder.encode(userDTO.getPassword());
         user.setPassword(hashedPassword);
+        String ssn = userDTO.getSsn() == null ? null : UserConfig.encrypt(userDTO.getSsn());
+        user.setSsn(ssn);
         User savedUser = userRepository.save(user);
         if (savedUser == null) {
             throw new UserAlreadyExistsException("User is already registered with given email" + user.getEmail());
