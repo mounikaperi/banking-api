@@ -9,16 +9,33 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table(name="user")
 @Getter
 @Setter
 public class User {
+    public User() {
+
+    }
+    public User(String userId, String email, String dwollaCustomerUrl, String dwollaCustomerId, String firstName, String lastName, String address, String city, String postalCode, LocalDateTime dateOfBirth) {
+        this.userId = userId;
+        this.email = email;
+        this.dwollaCustomerUrl = dwollaCustomerUrl;
+        this.dwollaCustomerId = dwollaCustomerId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.postalCode = postalCode;
+        this.dateOfBirth = dateOfBirth;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private long userId;
+    private long id;
+
+    private String userId;
 
     private String email;
 
@@ -57,5 +74,4 @@ public class User {
     @LastModifiedBy
     @Column(insertable = false)
     private String updatedBy;
-
 }
