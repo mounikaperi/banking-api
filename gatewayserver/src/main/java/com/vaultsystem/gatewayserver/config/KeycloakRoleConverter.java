@@ -1,4 +1,4 @@
-package com.bankingapi.gatewayserver.config;
+package com.vaultsystem.gatewayserver.config;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.GrantedAuthority;

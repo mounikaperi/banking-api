@@ -1,4 +1,4 @@
-package com.bankingapi.gatewayserver;
+package com.vaultsystem.gatewayserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

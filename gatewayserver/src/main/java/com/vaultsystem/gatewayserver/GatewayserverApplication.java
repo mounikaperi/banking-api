@@ -1,4 +1,4 @@
-package com.bankingapi.gatewayserver;
+package com.vaultsystem.gatewayserver;
 
 import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;
 import io.github.resilience4j.timelimiter.TimeLimiterConfig;

@@ -1,4 +1,4 @@
-package com.bankingapi.gatewayserver.filters;
+package com.vaultsystem.gatewayserver.filters;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
