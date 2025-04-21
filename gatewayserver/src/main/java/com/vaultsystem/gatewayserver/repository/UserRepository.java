@@ -1,7 +1,6 @@
 package com.vaultsystem.gatewayserver.repository;
 
 import com.vaultsystem.gatewayserver.model.User;
-import com.vaultsystem.user.model.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

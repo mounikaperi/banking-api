@@ -2,6 +2,7 @@ package com.vaultsystem.gatewayserver.config;
 
 import com.vaultsystem.gatewayserver.exceptionhandling.CustomAccessDeniedHandler;
 import com.vaultsystem.gatewayserver.exceptionhandling.CustomBasicAuthenticationEntryPoint;
+import com.vaultsystem.gatewayserver.filters.CsrfCookieFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
