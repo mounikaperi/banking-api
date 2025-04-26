@@ -11,18 +11,19 @@ import org.springframework.data.annotation.LastModifiedDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="user")
+@Table(name="customer")
 @Getter
 @Setter
-public class User {
-    public User() {
+public class Customer {
+    public Customer() {
 
     }
-    public User(String userId, String email, String dwollaCustomerUrl, String dwollaCustomerId, String firstName, String lastName, String address, String city, String postalCode, LocalDateTime dateOfBirth) {
+
+    public Customer(String customerId, String userId, String password, String emailAddress, String firstName, String lastName, String address, String city, String postalCode, LocalDateTime dateOfBirth) {
+        this.customerId = customerId;
         this.userId = userId;
-        this.email = email;
-        this.dwollaCustomerUrl = dwollaCustomerUrl;
-        this.dwollaCustomerId = dwollaCustomerId;
+        this.password = password;
+        this.emailAddress = emailAddress;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -32,18 +33,14 @@ public class User {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String customerId;
 
     private String userId;
 
-    private String email;
+    private String emailAddress;
 
     private String password;
-
-    private String dwollaCustomerUrl;
-
-    private String dwollaCustomerId;
 
     private String firstName;
 
@@ -56,8 +53,6 @@ public class User {
     private String postalCode;
 
     private LocalDateTime dateOfBirth;
-
-    private String ssn;
 
     @CreatedDate
     @Column(updatable = false)
