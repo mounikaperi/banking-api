@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class AuthorizationEvents {
     @EventListener
     public void onFailure(AuthorizationDeniedEvent deniedEvent) {
-        log.error("Authorization failed for the user : {} due to : {}", deniedEvent.getAuthentication().get().getName(),
+        log.error("Authorization failed for the customer : {} due to : {}", deniedEvent.getAuthentication().get().getName(),
                 deniedEvent.getAuthorizationDecision().toString());
     }
 }

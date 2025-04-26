@@ -63,7 +63,7 @@ public class SecurityConfig {
                             .requestMatchers("/myBalance").hasAnyRole("USER", "ADMIN")
                             .requestMatchers("/myLoans").authenticated()
                             .requestMatchers("/myCards").hasRole("USER")
-                            .requestMatchers("/user").authenticated()
+                            .requestMatchers("/customer").authenticated()
                             .requestMatchers("/notices", "/contact", "/error", "/register").permitAll());
         http.oauth2ResourceServer(rsc -> rsc.jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(jwtAuthenticationConverter)));
         http.exceptionHandling(ehc -> ehc.accessDeniedHandler(new CustomAccessDeniedHandler()));
