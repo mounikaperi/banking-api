@@ -1,6 +1,7 @@
 package com.vaultsystem.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.vaultsystem.user.model.UserBankMapping;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -8,6 +9,7 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Schema(name = "Customer", description = "Schema to validate user information")
@@ -17,7 +19,7 @@ public class CustomerDTO {
     @Schema(description = "customerId of the registered user", example="speri")
     private String customerId;
 
-    @Schema(description = "customerId of the registered user", example="speri")
+    @Schema(description = "userId of the registered user", example="speri")
     private String userId;
 
     @NotEmpty(message = "FirstName of the user cannot be null or empty")
@@ -51,5 +53,10 @@ public class CustomerDTO {
     @Schema(description = "DateOfBirth of the registered user", example="DD/MM/YYYY")
     @DateTimeFormat
     private LocalDateTime dateOfBirth;
+
+
+    @NotEmpty(message = "List of Banks and respective accountId's the customer is affiliated to cannot be null or empty")
+    @Schema(description = "List of Banks and respective accountId's of the registered user", example="DD/MM/YYYY")
+    private List<BankDTO> banksDTOList;
 
 }

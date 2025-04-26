@@ -1,9 +1,7 @@
 package com.vaultsystem.user.service;
 
-import com.vaultsystem.user.config.UserConfig;
 import com.vaultsystem.user.dto.CustomerDTO;
-import com.vaultsystem.user.dto.UserDTO;
-import com.vaultsystem.user.exceptions.UserAlreadyExistsException;
+import com.vaultsystem.user.exceptions.CustomerAlreadyExistsException;
 import com.vaultsystem.user.model.Customer;
 import com.vaultsystem.user.repository.CustomerRepository;
 import lombok.AllArgsConstructor;
@@ -14,16 +12,20 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
 
-    private final CustomerRepository userRepository;
+    private final CustomerRepository customerRepository;
+
+    private final UserBankMappingService userBankMappingService;
+
 
     @Transactional
-    public void registerCustomer(CustomerDTO userDTO) {
-        Customer user = new Customer(userDTO.getCustomerId(), userDTO.getUserId(), userDTO.getPassword(), userDTO.getEmailAddress(),
-                userDTO.getFirstName(), userDTO.getLastName(), userDTO.getAddress(),
-                userDTO.getCity(), userDTO.getPostalCode(), userDTO.getDateOfBirth());
-        Customer savedUser = userRepository.save(user);
+    public void registerCustomer(CustomerDTO customerDTO) {
+        Customer customer = new Customer(customerDTO.getCustomerId(), customerDTO.getUserId(), customerDTO.getPassword(), customerDTO.getEmailAddress(),
+                customerDTO.getFirstName(), customerDTO.getLastName(), customerDTO.getAddress(),
+                customerDTO.getCity(), customerDTO.getPostalCode(), customerDTO.getDateOfBirth());
+        Customer savedUser = customerRepository.save(customer);
+        userBankMappingService.registerBankIdAccountIdOfUser(customerDTO.getCustomerId(), customerDTO.getBanksDTOList());
         if (savedUser == null) {
-            throw new UserAlreadyExistsException("User is already registered with given email" + user.getEmailAddress());
+            throw new CustomerAlreadyExistsException("User is already registered with given email" + customer.getEmailAddress());
         }
     }
 }
