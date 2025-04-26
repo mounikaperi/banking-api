@@ -4,19 +4,23 @@ System Design:
 - Banks like Axis, ICICI, HDFC are real external banks, and they each have their own databases (which VaultSystems does't control).
 - VaultSystem platform is aggregating all the bank's data that a particular user has — so it must have it;s own internal system to manage links.
 
-Database Design for Vault System
+Database Design for Vault System:
 - aggregator-db (Vault System's database)
+  
         ├── customer (table)           <-- All the customer's data resides in this db who have registered to use VaultSystems
         ├── banks (table)              <-- available banks to link that VaultSystems front end shows
         ├── user_bank_mapping (table)  <-- user's linked banks mappings. Once user links all banks from the application, next time user should not be prompted again and again. The data should be loaded next time                                             he logs in to the app. So, we have to keep track of all the banks the user is affiliated to in the database.
 - axis-db (external database)
+
         ├── real customer data of Axis bank
         ├── real accounts, transactions, loans, cards, branches the account is linked to
 - icici-db (external database)
+  
         ├── real customer data of ICICI bank
         ├── real accounts, transactions, loans, cards
 
 - hdfc-db (external database)
+  
         ├── real customer data of HDFC bank
         ├── real accounts, transactions, loans, cards
 
