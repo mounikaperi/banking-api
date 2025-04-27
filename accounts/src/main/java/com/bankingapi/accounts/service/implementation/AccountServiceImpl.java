@@ -1,6 +1,7 @@
 package com.bankingapi.accounts.service.implementation;
 
 import com.bankingapi.accounts.constants.AccountsConstants;
+import com.bankingapi.accounts.dto.BankAccountDetailsDTO;
 import com.bankingapi.accounts.entities.Accounts;
 import com.bankingapi.accounts.entities.Customer;
 import com.bankingapi.accounts.exception.ResourceNotFoundException;
@@ -15,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -24,60 +26,20 @@ public class AccountServiceImpl implements IAccountsService {
 
     private static final Logger log = LoggerFactory.getLogger(AccountServiceImpl.class);
 
-    private AccountsRepository accountsRepository;
-    private CustomerRepository customerRepository;
-    private final StreamBridge streamBridge;
+    private final AxisAccountsRepository axisAccountsRepository;
+    private final IciciAccountsRepository iciciAccountsRepository;
+    private final HdfcAccountsRepository hdfcAccountsRepository;
 
-    public CustomerDTO fetchAccount(String mobileNumber) {
-        Customer customer = customerRepository.findByMobileNumber(mobileNumber).orElseThrow(
-                () -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber)
-        );
-        Accounts accounts = accountsRepository.findByCustomerId(customer.getCustomerId()).orElseThrow(
-                () -> new ResourceNotFoundException("Account", "customerId", customer.getCustomerId().toString())
-        );
-        CustomerDTO customerDTO = CustomerMapper.mapToCustomerDTO(customer, new CustomerDTO());
-        customerDTO.setAccountsDTO(AccountsMapper.mapToAccountsDTO(accounts, new AccountsDTO()));
-        return customerDTO;
-    }
-
-    public boolean updateAccount(CustomerDTO customerDTO) {
-        boolean isUpdated = false;
-        AccountsDTO accountsDTO = customerDTO.getAccountsDTO();
-        if (accountsDTO != null) {
-            Accounts accounts = accountsRepository.findById(accountsDTO.getAccountNumber()).orElseThrow(
-                    () -> new ResourceNotFoundException("Account", "AccountNumber", accountsDTO.getAccountNumber().toString())
-            );
-            AccountsMapper.mapToAccounts(accountsDTO, accounts);
-            accounts = accountsRepository.save(accounts);
-            Long customerId = accounts.getCustomerId();
-            Customer customer = customerRepository.findById(customerId).orElseThrow(
-                    () -> new ResourceNotFoundException("Customer", "CustomerId", customerId.toString())
-            );
-            CustomerMapper.mapToCustomer(customerDTO, customer);
-            customerRepository.save(customer);
-            isUpdated = true;
-        }
-        return isUpdated;
-    }
-
-    public boolean deleteAccount(String mobileNumber) {
-        Customer customer = customerRepository.findByMobileNumber(mobileNumber).orElseThrow(
-                () -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber)
-        );
-        accountsRepository.deleteByCustomerId(customer.getCustomerId());
-        customerRepository.deleteById(customer.getCustomerId());
-        return true;
+    public AccountServiceImpl(AxisAccountsRepository axisAccountsRepository, IciciAccountsRepository iciciAccountsRepository, HdfcAccountsRepository hdfcAccountsRepository) {
+        this.axisAccountsRepository = axisAccountsRepository;
+        this.iciciAccountsRepository = iciciAccountsRepository;
+        this.hdfcAccountsRepository = hdfcAccountsRepository;
     }
 
     @Override
-    public boolean updateCommunicationStatus(Long accountNumber) {
-        boolean isUpdated = false;
-        if (accountNumber != null) {
-            Accounts accounts = accountsRepository.findById(accountNumber).orElseThrow(() -> new ResourceNotFoundException("Account", "AccountNumber", accountNumber.toString()));
-            accounts.setCommunicationSw(true);
-            accountsRepository.save(accounts);
-            isUpdated = true;
-        }
-        return isUpdated;
+    public List<BankAccountDetailsDTO> getAllUserBankAccountDetails(String userId) {
+        // feign client call and take the banks that are applicable for user
+
+        return null;
     }
 }
