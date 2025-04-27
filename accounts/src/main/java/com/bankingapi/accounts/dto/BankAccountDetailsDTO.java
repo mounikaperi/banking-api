@@ -6,6 +6,7 @@ import lombok.Data;
 public class BankAccountDetailsDTO {
     private String accountId;
     private String branchId;
+    private String bankName;
     private String accountType;
     private String currencyCode;
     private String openDate;

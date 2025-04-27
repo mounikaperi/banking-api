@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AxisAccountRepository extends JpaRepository<BankAccountDetails, String> {
+public interface IciciAccountRepository extends JpaRepository<BankAccountDetails, String> {
     List<BankAccountDetails> findByAccountId(String accountId);
 }
 
