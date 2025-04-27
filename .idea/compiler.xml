@@ -14,15 +14,19 @@
         <module name="configserver" />
         <module name="accounts" />
         <module name="message" />
-        <module name="user" />
+        <module name="customer" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="user" target="21" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="accounts" options="-parameters" />
       <module name="cards" options="-parameters" />
       <module name="configserver" options="-parameters" />
+      <module name="customer" options="-parameters" />
       <module name="eurekaserver" options="-parameters" />
       <module name="gatewayserver" options="-parameters" />
       <module name="loans" options="-parameters" />

@@ -1,12 +1,8 @@
 package com.bankingapi.accounts.service.implementation;
 
 import com.bankingapi.accounts.constants.AccountsConstants;
-import com.bankingapi.accounts.dto.AccountsDTO;
-import com.bankingapi.accounts.dto.AccountsMsgDTO;
-import com.bankingapi.accounts.dto.CustomerDTO;
 import com.bankingapi.accounts.entities.Accounts;
 import com.bankingapi.accounts.entities.Customer;
-import com.bankingapi.accounts.exception.CustomerAlreadyExistsException;
 import com.bankingapi.accounts.exception.ResourceNotFoundException;
 import com.bankingapi.accounts.mapper.AccountsMapper;
 import com.bankingapi.accounts.mapper.CustomerMapper;

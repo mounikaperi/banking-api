@@ -15,9 +15,6 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CustomerDTO {
 
-    @Schema(description = "customerId of the registered customer", example="speri")
-    private String customerId;
-
     @Schema(description = "userId of the registered customer", example="speri")
     private String userId;
 

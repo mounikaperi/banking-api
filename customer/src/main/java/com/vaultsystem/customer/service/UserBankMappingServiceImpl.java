@@ -16,11 +16,11 @@ public class UserBankMappingServiceImpl implements UserBankMappingService {
     private final UserBankMappingRepository userBankMappingRepository;
 
     @Override
-    public void registerBankIdAccountIdOfUser(String customerId, List<BankDTO> banks) {
+    public void registerBankIdAccountIdOfUser(String userId, List<BankDTO> banks) {
         List<UserBankMapping> mappings = new ArrayList<>();
         for (BankDTO bank: banks) {
             UserBankMapping mapping = new UserBankMapping(
-                    customerId,
+                    userId,
                     bank.getBankId(),
                     bank.getBankAccountId(),
                     Boolean.TRUE

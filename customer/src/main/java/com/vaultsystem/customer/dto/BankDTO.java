@@ -19,7 +19,6 @@ public class BankDTO {
     @Schema(description = "bankId of the bank", example="speri")
     private String bankId;
 
-    @NotEmpty(message = "BankAccountId of the customer cannot be null or empty")
     @Schema(description = "BankAccountId of the registered customer", example="")
     private String bankAccountId;
 

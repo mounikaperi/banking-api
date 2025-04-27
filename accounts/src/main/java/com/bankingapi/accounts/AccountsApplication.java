@@ -1,6 +1,5 @@
 package com.bankingapi.accounts;
 
-import com.bankingapi.accounts.dto.AccountsContactInfoDTO;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;

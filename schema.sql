@@ -126,14 +126,12 @@ CREATE TABLE banks (
     bankId VARCHAR(10) NOT NULL UNIQUE,
     bankName VARCHAR(100) NOT NULL,
     bankCode VARCHAR(20) NOT NULL UNIQUE, -- like AXIS, ICICI
-    apiBaseUrl VARCHAR(255) NOT NULL,     -- base URL for calling bank APIs
-    logoUrl VARCHAR(255),                 -- for frontend display
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (bankId)
 );
 CREATE TABLE user_bank_mapping (
     mappingId INT AUTO_INCREMENT PRIMARY KEY,
-    customerId VARCHAR(10) NOT NULL,
+    userId VARCHAR(10) NOT NULL UNIQUE,
     bankId VARCHAR(10) NOT NULL,
     bankAccountId VARCHAR(15) NOT NULL,
     accountLinked BOOLEAN DEFAULT FALSE, -- TRUE when user finished authorization

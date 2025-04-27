@@ -19,8 +19,7 @@ public class Customer {
 
     }
 
-    public Customer(String customerId, String userId, String password, String emailAddress, String firstName, String lastName, String address, String city, String postalCode, LocalDateTime dateOfBirth) {
-        this.customerId = customerId;
+    public Customer(String userId, String password, String emailAddress, String firstName, String lastName, String address, String city, String postalCode, LocalDateTime dateOfBirth) {
         this.userId = userId;
         this.password = password;
         this.emailAddress = emailAddress;
