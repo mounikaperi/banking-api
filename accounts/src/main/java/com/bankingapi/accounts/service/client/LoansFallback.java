@@ -1,8 +1,5 @@
 package com.bankingapi.accounts.service.client;
 
-import com.bankingapi.accounts.constants.AccountsConstants;
-import com.bankingapi.accounts.dto.LoansDTO;
-import com.bankingapi.accounts.dto.ResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;

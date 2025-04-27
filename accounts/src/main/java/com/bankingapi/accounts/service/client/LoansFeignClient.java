@@ -1,6 +1,5 @@
 package com.bankingapi.accounts.service.client;
 
-import com.bankingapi.accounts.dto.LoansDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

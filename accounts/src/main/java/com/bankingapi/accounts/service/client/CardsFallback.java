@@ -1,6 +1,5 @@
 package com.bankingapi.accounts.service.client;
 
-import com.bankingapi.accounts.dto.CardsDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 

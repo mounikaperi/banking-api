@@ -1,7 +1,6 @@
 package com.bankingapi.accounts.controller;
 
-import com.bankingapi.accounts.dto.AccountsContactInfoDTO;
-import com.bankingapi.accounts.dto.CustomerDTO;
+import com.bankingapi.accounts.dto.CustomerBankDetailsDTO;
 import com.bankingapi.accounts.dto.ErrorResponseDTO;
 import com.bankingapi.accounts.dto.ResponseDTO;
 import com.bankingapi.accounts.constants.AccountsConstants;
@@ -14,9 +13,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -33,37 +29,6 @@ public class AccountsController {
 
     public AccountsController(IAccountsService iAccountsService) {
         this.iAccountsService = iAccountsService;
-    }
-
-    @Value("${build.version}")
-    private String buildVersion;
-
-    @Autowired
-    private Environment environment;
-
-    @Autowired
-    private AccountsContactInfoDTO accountsContactInfoDTO;
-
-    @Operation(summary = "Create Account REST API", description = "REST API to create new Customer")
-    @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "HTTP Status CREATED"),
-            @ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorResponseDTO.class)))
-    })
-    @PostMapping("/create")
-    public ResponseEntity<ResponseDTO> createAccount(@Valid @RequestBody CustomerDTO customerDTO) {
-        iAccountsService.createAccount(customerDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseDTO(AccountsConstants.STATUS_201, AccountsConstants.MESSAGE_201));
-    }
-
-    @Operation(summary = "Fetch Account Details REST API", description = "REST APII to fetch customer and Account details based on a mobile number")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "HTTP Status OK"),
-            @ApiResponse(responseCode = "500", description = "HTTP Status Internal Server Error", content = @Content(schema = @Schema(implementation = ErrorResponseDTO.class)))
-    })
-    @GetMapping("/fetch")
-    public ResponseEntity<CustomerDTO> fetchAccountDetails(@RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobilenumber must be 10 digits") String mobileNumber) {
-        CustomerDTO customerDTO = iAccountsService.fetchAccount(mobileNumber);
-        return ResponseEntity.status(HttpStatus.OK).body(customerDTO);
     }
 
     @Operation(summary = "Update Account Details REST API", description = "REST API to update Customer and Account details on a account number")
