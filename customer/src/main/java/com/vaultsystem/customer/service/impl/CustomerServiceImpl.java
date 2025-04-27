@@ -1,10 +1,12 @@
-package com.vaultsystem.customer.service;
+package com.vaultsystem.customer.service.impl;
 
 import com.vaultsystem.customer.dto.CustomerBankDetailsDTO;
 import com.vaultsystem.customer.dto.CustomerDTO;
 import com.vaultsystem.customer.exceptions.CustomerAlreadyExistsException;
-import com.vaultsystem.customer.model.Customer;
+import com.vaultsystem.customer.entities.Customer;
 import com.vaultsystem.customer.repository.CustomerRepository;
+import com.vaultsystem.customer.service.CustomerService;
+import com.vaultsystem.customer.service.UserBankMappingService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

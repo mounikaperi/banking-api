@@ -31,11 +31,6 @@ public class AccountsController {
         this.iAccountsService = iAccountsService;
     }
 
-    public ResponseEntity<CustomerBankDetailsDTO> fetchAccountDetails(@RequestParam String userId) {
-        CustomerDTO customerDTO = iAccountsService.fetchAccount(mobileNumber);
-        return ResponseEntity.status(HttpStatus.OK).body(customerDTO);
-    }
-
     @Operation(summary = "Update Account Details REST API", description = "REST API to update Customer and Account details on a account number")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "HTTP status OK"),

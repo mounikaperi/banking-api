@@ -1,4 +1,4 @@
-package com.vaultsystem.customer.model;
+package com.vaultsystem.customer.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;

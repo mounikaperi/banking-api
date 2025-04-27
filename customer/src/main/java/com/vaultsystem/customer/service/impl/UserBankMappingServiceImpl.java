@@ -1,8 +1,10 @@
-package com.vaultsystem.customer.service;
+package com.vaultsystem.customer.service.impl;
 
 import com.vaultsystem.customer.dto.BankDTO;
-import com.vaultsystem.customer.model.UserBankMapping;
+import com.vaultsystem.customer.dto.UserBankMappingDTO;
+import com.vaultsystem.customer.entities.UserBankMapping;
 import com.vaultsystem.customer.repository.UserBankMappingRepository;
+import com.vaultsystem.customer.service.UserBankMappingService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +18,9 @@ public class UserBankMappingServiceImpl implements UserBankMappingService {
     private final UserBankMappingRepository userBankMappingRepository;
 
     @Override
-    public void registerBankIdAccountIdOfUser(String userId, List<BankDTO> banks) {
+    public void registerBankIdAccountIdOfUser(String userId, List<UserBankMappingDTO> banks) {
         List<UserBankMapping> mappings = new ArrayList<>();
-        for (BankDTO bank: banks) {
+        for (UserBankMappingDTO bank: banks) {
             UserBankMapping mapping = new UserBankMapping(
                     userId,
                     bank.getBankId(),

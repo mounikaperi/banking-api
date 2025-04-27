@@ -1,6 +1,6 @@
 package com.vaultsystem.customer.repository;
 
-import com.vaultsystem.customer.model.Customer;
+import com.vaultsystem.customer.entities.Customer;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

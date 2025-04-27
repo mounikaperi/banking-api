@@ -53,6 +53,6 @@ public class CustomerDTO {
 
     @NotEmpty(message = "List of Banks and respective accountId's the customer is affiliated to cannot be null or empty")
     @Schema(description = "List of Banks and respective accountId's of the registered customer", example="DD/MM/YYYY")
-    private List<BankDTO> banksDTOList;
+    private List<UserBankMappingDTO> banksDTOList;
 
 }
