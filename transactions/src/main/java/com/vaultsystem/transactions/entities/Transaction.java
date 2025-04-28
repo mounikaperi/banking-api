@@ -2,12 +2,16 @@ package com.vaultsystem.transactions.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name="transactions")
+@Getter @Setter @AllArgsConstructor
 public class Transaction {
     private String transactionId;
     private String accountId;

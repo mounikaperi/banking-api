@@ -8,18 +8,27 @@ import com.vaultsystem.customer.service.UserBankMappingService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
+@RequestMapping(path = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
+@Validated
 public class CustomerController {
 
     private final CustomerService customerService;
     private final UserBankMappingService userBankMappingService;
     private final BankService bankService;
+
+    public CustomerController(CustomerService customerService, UserBankMappingService userBankMappingService, BankService bankService) {
+        this.customerService = customerService;
+        this.userBankMappingService = userBankMappingService;
+        this.bankService = bankService;
+    }
 
     @PostMapping("/register")
     public ResponseEntity<ResponseDTO> registerCustomer(@Valid @RequestBody CustomerDTO customer) {
