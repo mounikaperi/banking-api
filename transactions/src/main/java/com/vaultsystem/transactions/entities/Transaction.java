@@ -5,6 +5,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name="transactions")
 @Getter @Setter @AllArgsConstructor
+@Document(indexName = "transaction_index")
 public class Transaction {
     private String transactionId;
     private String accountId;

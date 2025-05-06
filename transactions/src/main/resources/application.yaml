@@ -17,3 +17,38 @@ spring:
       username: root
       password: Mummagirl@123
       driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: transaction-consumer-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    template:
+      default-topic: bank-transactions-topic
+    topic:
+      transaction-events: bank-transactions-topic
+  data:
+    elasticsearch:
+      uris: http://localhost:9200
+  elasticsearch:
+    cluster-name: bank-transactions-elasticsearch
+    cluster-nodes: localhost:9200
+    index:
+      transactions: transaction_index
+server:
+  port: 8090
+
+logging:
+  level:
+    org.springframework: INFO
+
+kafka:
+  topic: transaction-events

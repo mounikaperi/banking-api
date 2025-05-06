@@ -1,7 +1,9 @@
-package com.vaultsystem.transactions;
+package com.vaultsystem.transactions.controllers;
 
+import com.vaultsystem.transactions.dto.TransactionDTO;
 import com.vaultsystem.transactions.entities.Transaction;
 import com.vaultsystem.transactions.service.TransactionService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -23,7 +25,14 @@ public class TransactionController {
     }
 
     @GetMapping("/getAllAccountTransactions")
-    public ResponseEntity<List<Transaction>> getAllBankAccountTransactions(@RequestParam String userId) {
-        return null;
+    public ResponseEntity<List<TransactionDTO>> getAllBankAccountTransactions(
+            @RequestParam String userId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "transactionDate") String sortBy,
+            @RequestParam(defaultValue = "DESC") String sortDirection
+    ) {
+        List<TransactionDTO> fetchedTransactions = transactionService.getAllTransactions(userId, page, size, sortBy, sortDirection);
+        return ResponseEntity.status(HttpStatus.OK).body(fetchedTransactions);
     }
 }
